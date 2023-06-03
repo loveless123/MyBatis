@@ -1,0 +1,7 @@
+# Project exclude paths
+/mybatis-001-introduction/target/
+/mybatis-002-crud/target/
+/mybatis-004-web/target/
+/mybatis-005-crud2/target/
+/mybatis-008-car/target/
+/mybatis-009-dynamic-sql/target/
