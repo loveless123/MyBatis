@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lk.mybatis.mapper.CarMapper">
+    <select id="selectByMultiCondition" resultType="car">
+        select * from t_car where 1=1
+        <if test="brand !=null and brand !=''">
+            and brand like "%"#{brand}"%"
+        </if>
+        <if test="guidePrice != null and guidePrice !=''">
+            and guide_Price >#{guidePrice}
+        </if>
+        <if test="carType != null and carType !=''">
+            and car_Type = #{carType}
+        </if>
+    </select>
+
+    <select id="selectByMultiConditionWithTrim" resultType="car">
+        select * from t_car
+    <trim prefix="where" suffixOverrides="and">
+        <if test="brand !=null and brand !=''">
+             brand like "%"#{brand}"%" and
+        </if>
+        <if test="guidePrice != null and guidePrice !=''">
+            and guide_Price >#{guidePrice}
+        </if>
+        <if test="carType != null and carType !=''">
+            and car_Type = #{carType}
+        </if>
+    </trim>
+    </select>
+
+    <insert id="insertByForeach" >
+        insert into t_car values
+    <foreach collection="cars" item="car" separator=",">
+        (null,#{car.carNum},#{car.brand},#{car.guidePrice},#{car.produceTime},#{car.carType})
+    </foreach>
+    </insert>
+</mapper>
